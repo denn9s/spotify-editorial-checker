@@ -20,7 +20,16 @@ def main():
 			playlist = sp.playlist(playlist['id'])
 			playlist_name = playlist['name']
 			if (checkPlaylist(playlist, playlist_name) == True):
-				pass
+				print(str(count) + '. ' + playlist_name.upper())
+				for item in playlist['tracks']['items']:
+					try:
+						album_id = item['track']['album']['id']
+						album_object = sp.album(album_id)
+						album_label = album_object['label']
+						label_count[album_label] += 1
+					except TypeError:
+						pass
+				count += 1
 		if playlists['next']:
 			playlists = sp.next(playlists)
 		else:
