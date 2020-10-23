@@ -26,7 +26,11 @@ def main():
 			playlists = None
 
 def checkPlaylist(playlist, playlist_name):
-	pass
+	if (playlist['followers']['total'] > 500000):
+		if (playlist_name[:7] != 'This Is'):
+			if (playlist_name[:9] != 'I Love My'):
+				return True
+	return False
 
 if __name__ == '__main__':
 	main()
