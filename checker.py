@@ -17,7 +17,7 @@ def main():
 	while playlists:
 		for i, playlist in enumerate(playlists['items']):
 			playlist = sp.playlist(playlist['id'])
-			playlist_name = pl['name']
+			playlist_name = playlist['name']
 			if (checkPlaylist(playlist, playlist_name) == True):
 				pass
 		if playlists['next']:
