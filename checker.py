@@ -13,6 +13,10 @@ label_count = defaultdict(int) # key = label name, value = amount of songs acros
 output_file = io.open('output.txt', 'w', encoding = 'utf-8', errors = 'ignore')
 
 def main():
+	filterPlaylists()
+	createOutput()
+
+def filterPlaylists():
 	playlists =	 sp.user_playlists('spotify')
 	count = 1
 	while playlists:
@@ -34,6 +38,9 @@ def main():
 			playlists = sp.next(playlists)
 		else:
 			playlists = None
+
+def createOutput():
+	pass
 
 def checkPlaylist(playlist, playlist_name):
 	if (playlist['followers']['total'] > 500000):
