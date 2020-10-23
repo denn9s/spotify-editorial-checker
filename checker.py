@@ -1,5 +1,6 @@
 import spotipy
 import io
+import re
 from collections import defaultdict
 from credentials import cid, secret
 from spotipy.oauth2 import SpotifyClientCredentials
@@ -29,7 +30,8 @@ def checkPlaylist(playlist, playlist_name):
 	if (playlist['followers']['total'] > 500000):
 		if (playlist_name[:7] != 'This Is'):
 			if (playlist_name[:9] != 'I Love My'):
-				return True
+				if (bool(re.search(r'\d', playlist_name)) == False):
+					return True
 	return False
 
 if __name__ == '__main__':
