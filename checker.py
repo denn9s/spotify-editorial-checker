@@ -1,4 +1,5 @@
 import spotipy
+import io
 from collections import defaultdict
 from credentials import cid, secret
 from spotipy.oauth2 import SpotifyClientCredentials
@@ -10,16 +11,22 @@ label_count = defaultdict(int) # key = label name, value = amount of songs acros
 
 output_file = io.open('output.txt', 'w', encoding = 'utf-8', errors = 'ignore')
 
-if __name__ == '__main__':
-	main()
-
 def main():
 	playlists =	 sp.user_playlists('spotify')
 	count = 1
 	while playlists:
 		for i, playlist in enumerate(playlists['items']):
-			pass
+			playlist = sp.playlist(playlist['id'])
+			playlist_name = pl['name']
+			if (checkPlaylist(playlist, playlist_name) == True):
+				pass
 		if playlists['next']:
 			playlists = sp.next(playlists)
 		else:
 			playlists = None
+
+def checkPlaylist(playlist, playlist_name):
+	pass
+
+if __name__ == '__main__':
+	main()
