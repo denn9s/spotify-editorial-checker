@@ -40,7 +40,28 @@ def filterPlaylists():
 			playlists = None
 
 def createOutput():
-	pass
+	total_songs = 0
+	label_list = []
+
+	for key, value in label_count.items():
+		if (value == None):
+			value = 0
+		combo = (key, value)
+		label_list.append(combo)
+	label_list.sort(key = lambda x:x[1])
+	label_list.reverse()
+
+	for item in label_list:
+		first = ''
+		if (item[0] == None):
+			first = 'N/A'
+		else:
+			first = item[0]
+		print(first, item[1])
+		output_file.write(first + ': ' + str(item[1]) + '\n')
+		total_songs += item[1]
+
+	output_file.write('TOTAL SONGS: ' + str(total_songs))
 
 def checkPlaylist(playlist, playlist_name):
 	if (playlist['followers']['total'] > 500000):
