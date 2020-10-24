@@ -30,6 +30,8 @@ def filterPlaylists():
 						album_id = item['track']['album']['id']
 						album_object = sp.album(album_id)
 						album_label = album_object['label']
+						if (checkFireflyEntertainment(album_label)):
+							pass
 						label_count[album_label] += 1
 					except TypeError:
 						pass
@@ -70,6 +72,12 @@ def checkPlaylist(playlist, playlist_name):
 				if (bool(re.search(r'\d', playlist_name)) == False):
 					return True
 	return False
+
+def checkFireflyEntertainment(label_name):
+	if (re.search('Firefly Entertainment', label_name, re.IGNORECASE)):
+		return True
+	else:
+		return False
 
 if __name__ == '__main__':
 	main()
