@@ -9,12 +9,15 @@ client_credentials_manager = SpotifyClientCredentials(client_id = cid, client_se
 sp = spotipy.Spotify(client_credentials_manager = client_credentials_manager)
 
 label_count = defaultdict(int) # key = label name, value = amount of songs across playlists
+firefly_songs = set()
 
 output_file = io.open('output.txt', 'w', encoding = 'utf-8', errors = 'ignore')
+firefly_file = io.open('firefly_songs.txt', 'w', encoding = 'utf-8', errors = 'ignore')
 
 def main():
 	filterPlaylists()
 	createOutput()
+	createFireflyOutput()
 
 def filterPlaylists():
 	playlists =	 sp.user_playlists('spotify')
@@ -31,7 +34,10 @@ def filterPlaylists():
 						album_object = sp.album(album_id)
 						album_label = album_object['label']
 						if (checkFireflyEntertainment(album_label)):
-							pass
+							track_name = item['track']['name']
+							track_artist = item['track']['artists'][0]['name']
+							track_all = track_artist + " - " + track_name
+							firefly_songs.add(track_all)
 						label_count[album_label] += 1
 					except TypeError:
 						pass
@@ -64,6 +70,10 @@ def createOutput():
 		total_songs += item[1]
 
 	output_file.write('TOTAL SONGS: ' + str(total_songs))
+
+def createFireflyOutput():
+	for song in sorted(firefly_songs):
+		firefly_file.write(song + '\n')
 
 def checkPlaylist(playlist, playlist_name):
 	if (playlist['followers']['total'] > 500000):
