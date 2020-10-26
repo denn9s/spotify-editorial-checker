@@ -2,6 +2,7 @@
 credentials.py
 output.txt
 firefly.txt
+firefly_songs.txt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
