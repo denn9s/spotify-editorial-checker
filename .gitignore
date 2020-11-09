@@ -4,6 +4,9 @@ output.*
 firefly.txt
 firefly_songs.*
 
+output/
+firefly_songs/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
