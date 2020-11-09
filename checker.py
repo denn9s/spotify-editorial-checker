@@ -11,8 +11,8 @@ sp = spotipy.Spotify(client_credentials_manager = client_credentials_manager)
 label_count = defaultdict(int) # key = label name, value = amount of songs across playlists
 firefly_songs = set()
 
-output_file = io.open('output.txt', 'w', encoding = 'utf-8', errors = 'ignore')
-firefly_file = io.open('firefly_songs.txt', 'w', encoding = 'utf-8', errors = 'ignore')
+output_file = io.open('output/output.txt', 'w', encoding = 'utf-8', errors = 'ignore')
+firefly_file = io.open('firefly_songs/firefly_songs.txt', 'w', encoding = 'utf-8', errors = 'ignore')
 
 def main():
 	filterPlaylists()
