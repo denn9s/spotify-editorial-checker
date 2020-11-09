@@ -1,6 +1,7 @@
 import spotipy
 import io
 import re
+import datetime
 from collections import defaultdict
 from credentials import cid, secret
 from spotipy.oauth2 import SpotifyClientCredentials
@@ -8,11 +9,15 @@ from spotipy.oauth2 import SpotifyClientCredentials
 client_credentials_manager = SpotifyClientCredentials(client_id = cid, client_secret = secret)
 sp = spotipy.Spotify(client_credentials_manager = client_credentials_manager)
 
+date = datetime.date.today()
+
 label_count = defaultdict(int) # key = label name, value = amount of songs across playlists
 firefly_songs = set()
 
-output_file = io.open('output/output.txt', 'w', encoding = 'utf-8', errors = 'ignore')
-firefly_file = io.open('firefly_songs/firefly_songs.txt', 'w', encoding = 'utf-8', errors = 'ignore')
+output_dir = 'output/output' + ' (' + str(date) + ').txt'
+output_file = io.open(output_dir, 'w', encoding = 'utf-8', errors = 'ignore')
+firefly_dir = 'firefly_songs/firefly_songs' + ' (' + str(date) + ').txt'
+firefly_file = io.open(firefly_dir, 'w', encoding = 'utf-8', errors = 'ignore')
 
 def main():
 	filterPlaylists()
