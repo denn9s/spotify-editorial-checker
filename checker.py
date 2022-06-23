@@ -29,7 +29,14 @@ def filterPlaylists():
 	count = 1
 	while playlists:
 		for i, playlist in enumerate(playlists['items']):
-			playlist = sp.playlist(playlist['id'])
+			result = None
+			while result is None:
+				try:
+					result = sp.playlist(playlist['id'])
+				except:
+					print('retrying')
+					pass
+			playlist = result
 			playlist_name = playlist['name']
 			if (checkPlaylist(playlist, playlist_name) == True):
 				print(str(count) + '. ' + playlist_name.upper())
